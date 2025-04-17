@@ -3,14 +3,14 @@ spring:
           name: movie-ticket-booking-system-api
     #data resource config file
    datasource:
-          url: jdbc:mysql://localhost:3306/movie-ticket-booking-system-api
+          url: jdbc:mysql://localhost:3306/movie-ticket-booking-system-api?createDatabaseIfNotExist=true
           username: root
           password: root
    jpa:
-          open-in-view: false
-          show-sql: true
-          hibernate:
-            ddl-auto: update
-          properties:
-            hibernate:
-              format_sql: true
+     open-in-view: false
+     show-sql: true
+     hibernate:
+       ddl-auto: update
+     properties:
+       hibernate:
+         format_sql: true
