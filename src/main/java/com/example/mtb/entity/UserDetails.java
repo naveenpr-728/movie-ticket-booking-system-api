@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
-public class userDetails {
+public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;

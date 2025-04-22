@@ -1,7 +1,8 @@
 package com.example.mtb.controller;
 
-import com.example.mtb.entity.userDetails;
-import com.example.mtb.service.userService;
+import com.example.mtb.dto.UserRegistrationRequest;
+import com.example.mtb.entity.UserDetails;
+import com.example.mtb.service.UserService;
 import com.example.mtb.utility.ResponseStructure;
 import com.example.mtb.utility.RestResponseBuilder;
 import lombok.AllArgsConstructor;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-public class userController {
+public class UserController {
 
-    private final userService userservice;
+    private final UserService userservice;
     private final RestResponseBuilder ResponseBuilder;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseStructure<userDetails>> addUser(@RequestBody userDetails user) {
-        userDetails userdetails = userservice.addUser(user);
+    public ResponseEntity<ResponseStructure<UserDetails>> addUser(@RequestBody UserRegistrationRequest user) {
+        UserDetails userdetails = userservice.addUser(user);
         return ResponseBuilder.sucess(HttpStatus.CREATED, "New user register successfully ", userdetails);
 
 
