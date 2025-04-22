@@ -1,9 +1,9 @@
 package com.example.mtb.repository;
 
-import com.example.mtb.entity.userDetails;
+import com.example.mtb.entity.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface userRepository extends JpaRepository<userDetails, String> {
+public interface UserRepository extends JpaRepository<UserDetails, String> {
 
     boolean existsByEmail(String email);
 }
