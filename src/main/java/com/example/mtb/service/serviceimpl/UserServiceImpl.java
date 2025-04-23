@@ -14,6 +14,9 @@ import com.example.mtb.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -36,10 +39,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse editUser(UserUpdationRequest userRequest, String email) {
-        if (userRepository.existsByEmail(email)){
+        if (userRepository.existsByEmail(email)) {
             UserDetails user = userRepository.findByEmail(email);
 
-            if( userRepository.existsByEmail(userRequest.email()))
+            if (userRepository.existsByEmail(userRequest.email()))
                 throw new UserExistByEmailException("User with this email already exists");
 
             user = copy(user, userRequest);
@@ -49,6 +52,18 @@ public class UserServiceImpl implements UserService {
 
         throw new UserNotFoundByEmailException("Email not found in the Database");
 
+    }
+
+    @Override
+    public UserResponse softDeleteUser(String email) {
+        if (userRepository.existsByEmail(email)) {
+            UserDetails user = userRepository.findByEmail(email);
+            user.setDelete(true);
+            user.setDeletedAt(LocalDateTime.now());
+            userRepository.save(user);
+            return userMapper.userDetailsResponseMapper(user);
+        }
+        throw new UserNotFoundByEmailException("Email not found in the Database");
     }
 
 
@@ -63,6 +78,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userRole);
         return userRole;
     }
+
     private UserDetails copy(UserDetails userRole, UserUpdationRequest user) {
         userRole.setDateOfBirth(user.DateOfBirth());
         userRole.setPhoneNumber(user.phoneNumber());
