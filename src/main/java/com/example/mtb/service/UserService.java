@@ -7,8 +7,9 @@ import com.example.mtb.entity.UserDetails;
 
 public interface UserService {
 
-   // public userDetails addUser(userDetails user);
-   // public UserDetails addUser(UserRegistrationRequest user);
+    // public userDetails addUser(userDetails user);
+    // public UserDetails addUser(UserRegistrationRequest user);
     public UserResponse addUser(UserRegistrationRequest user);
+
     UserResponse editUser(UserUpdationRequest user, String email);
 }
