@@ -5,13 +5,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 @Entity
 @Getter
 @Setter
+@ToString
+@EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UserDetails {
     @Id
@@ -26,8 +35,11 @@ public class UserDetails {
     private UserRole userRole;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate DateOfBirth;
-    private long createdAt;
-    private long updatedAt;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
 
 }
