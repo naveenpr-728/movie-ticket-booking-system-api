@@ -35,6 +35,8 @@ public class UserDetails {
     private UserRole userRole;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate DateOfBirth;
+    private boolean isDelete;
+    private LocalDateTime deletedAt;
 
     @CreatedDate
     private LocalDateTime createdAt;
