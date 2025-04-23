@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public UserResponse addUser(UserRegistrationRequest user) {
         if (userRepository.existsByEmail(user.email()))
             throw new UserExistByEmailException("User with this Email is already exists");
-//            return copy(user);
+
         UserDetails userDetails = switch (user.userRole()) {
             case USER -> copy(new User(), user);
             case THEATER_OWNER -> copy(new TheaterOwner(), user);
