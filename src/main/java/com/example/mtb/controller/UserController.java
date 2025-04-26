@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class UserController {
 
-    private final UserService userservice;
+        private final UserService userservice;
     private final RestResponseBuilder ResponseBuilder;
 
     @PostMapping("/register")
