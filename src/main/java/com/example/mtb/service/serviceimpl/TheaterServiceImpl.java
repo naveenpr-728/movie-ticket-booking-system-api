@@ -1,6 +1,7 @@
 package com.example.mtb.service.serviceimpl;
 
 import com.example.mtb.dto.TheaterRegistrationRequest;
+import com.example.mtb.dto.TheaterRequest;
 import com.example.mtb.dto.TheaterResponse;
 import com.example.mtb.entity.Theater;
 import com.example.mtb.entity.TheaterOwner;
@@ -31,8 +32,7 @@ public class TheaterServiceImpl implements TheaterService {
         }
         throw new UserNotFoundByEmailException("No Theater Owner with the provided email is present");
     }
-
-    @Override
+  
     public TheaterResponse findTheater(String theaterId) {
             if(theaterRepository.existsById(theaterId)){
                 Theater theater = theaterRepository.findById(theaterId).get();
@@ -40,6 +40,18 @@ public class TheaterServiceImpl implements TheaterService {
             }
             throw new TheaterNotFoundByIdException("Theater not found by the id");
         }
+
+    @Override
+
+    public TheaterResponse updateTheater(String theaterId, TheaterRequest registrationRequest) {
+        if(theaterRepository.existsById(theaterId)) {
+            Theater theater = theaterRepository.findById(theaterId).get();
+            theater = copy(registrationRequest, theater);
+            return theaterMapper.theaterResponseMapper(theater);
+        }
+        throw new TheaterNotFoundByIdException("Theater not found by id");
+    }
+
 
     private Theater copy(TheaterRegistrationRequest registrationRequest, Theater theater, UserDetails userDetails) {
         theater.setAddress(registrationRequest.address());
@@ -51,6 +63,14 @@ public class TheaterServiceImpl implements TheaterService {
         return theater;
     }
 
-
+private Theater copy(TheaterRequest registrationRequest, Theater theater) {
+    theater.setAddress(registrationRequest.address());
+    theater.setCity(registrationRequest.city());
+    theater.setName(registrationRequest.name());
+    theater.setLandmark(registrationRequest.landmark());
+    theaterRepository.save(theater);
+    return theater;
 }
+}
+
 

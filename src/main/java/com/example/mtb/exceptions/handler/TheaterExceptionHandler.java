@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @AllArgsConstructor
 public class TheaterExceptionHandler {
-
     private final RestResponseBuilder responseBuilder;
 
     @ExceptionHandler
     public ResponseEntity<ErrorStructure> handleTheaterNotFoundByIdException(TheaterNotFoundByIdException ex){
         return responseBuilder.error(HttpStatus.NOT_FOUND, "Theater with the requested ID not found");
     }
-
 }
