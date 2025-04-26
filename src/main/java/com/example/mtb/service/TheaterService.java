@@ -8,7 +8,9 @@ public interface TheaterService {
 
     TheaterResponse addTheater(String email, TheaterRegistrationRequest theaterRegistrationRequest);
 
-    TheaterResponse updateTheater(String theaterId, TheaterRequest registerationRequest);
 
+    TheaterResponse findTheater(String theaterId);
+
+    TheaterResponse updateTheater(String theaterId, TheaterRequest registerationRequest);
 }
 

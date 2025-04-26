@@ -32,8 +32,17 @@ public class TheaterServiceImpl implements TheaterService {
         }
         throw new UserNotFoundByEmailException("No Theater Owner with the provided email is present");
     }
+  
+    public TheaterResponse findTheater(String theaterId) {
+            if(theaterRepository.existsById(theaterId)){
+                Theater theater = theaterRepository.findById(theaterId).get();
+                return theaterMapper.theaterResponseMapper(theater);
+            }
+            throw new TheaterNotFoundByIdException("Theater not found by the id");
+        }
 
     @Override
+
     public TheaterResponse updateTheater(String theaterId, TheaterRequest registrationRequest) {
         if(theaterRepository.existsById(theaterId)) {
             Theater theater = theaterRepository.findById(theaterId).get();
@@ -42,6 +51,7 @@ public class TheaterServiceImpl implements TheaterService {
         }
         throw new TheaterNotFoundByIdException("Theater not found by id");
     }
+
 
     private Theater copy(TheaterRegistrationRequest registrationRequest, Theater theater, UserDetails userDetails) {
         theater.setAddress(registrationRequest.address());
