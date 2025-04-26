@@ -9,9 +9,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -24,5 +22,10 @@ public class TheaterController {
     public ResponseEntity<ResponseStructure<TheaterResponse>> addTheater(String email, @Valid @RequestBody  TheaterRegistrationRequest theaterRegistrationRequest){
         TheaterResponse theaterResponse = theaterService.addTheater(email, theaterRegistrationRequest);
         return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully created", theaterResponse);
+    }
+    @GetMapping("theaters/{theaterId}")
+    public ResponseEntity<ResponseStructure<TheaterResponse>> findTheater(@PathVariable String theaterId){
+        TheaterResponse theaterResponse = theaterService.findTheater(theaterId);
+        return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully fetched", theaterResponse);
     }
 }

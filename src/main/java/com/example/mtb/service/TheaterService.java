@@ -6,5 +6,7 @@ import com.example.mtb.dto.TheaterResponse;
 public interface TheaterService {
 
     TheaterResponse addTheater(String email, TheaterRegistrationRequest theaterRegistrationRequest);
+
+    TheaterResponse findTheater(String theaterId);
 }
 
