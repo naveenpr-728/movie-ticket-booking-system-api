@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class TheaterController {
@@ -20,21 +21,22 @@ public class TheaterController {
 
 
     @PostMapping("/theaters")
-    public ResponseEntity<ResponseStructure<TheaterResponse>> addTheater(String email, @Valid @RequestBody  TheaterRegistrationRequest theaterRegistrationRequest){
+    public ResponseEntity<ResponseStructure<TheaterResponse>> addTheater(String email, @Valid @RequestBody TheaterRegistrationRequest theaterRegistrationRequest) {
         TheaterResponse theaterResponse = theaterService.addTheater(email, theaterRegistrationRequest);
         return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully created", theaterResponse);
     }
 
 
     @GetMapping("theaters/{theaterId}")
-    public ResponseEntity<ResponseStructure<TheaterResponse>> findTheater(@PathVariable String theaterId){
+    public ResponseEntity<ResponseStructure<TheaterResponse>> findTheater(@PathVariable String theaterId) {
         TheaterResponse theaterResponse = theaterService.findTheater(theaterId);
         return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully fetched", theaterResponse);
 
     }
 
     @PutMapping("/theaters/{theaterId}")
-    public ResponseEntity<ResponseStructure<TheaterResponse>> updateTheater(@PathVariable String theaterId, @Valid @RequestBody TheaterRequest registrationRequest){
+    public ResponseEntity<ResponseStructure<TheaterResponse>> updateTheater(@PathVariable String theaterId, @Valid @RequestBody TheaterRequest registrationRequest) {
         TheaterResponse theaterResponse = theaterService.updateTheater(theaterId, registrationRequest);
-        return responseBuilder.sucess(HttpStatus.OK, "Theater has been sucessfully Updated", theaterResponse);
+        return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully Updated", theaterResponse);
+    }
 }

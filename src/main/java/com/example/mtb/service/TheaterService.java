@@ -11,6 +11,6 @@ public interface TheaterService {
 
     TheaterResponse findTheater(String theaterId);
 
-    TheaterResponse updateTheater(String theaterId, TheaterRequest registerationRequest);
+    TheaterResponse updateTheater(String theaterId, TheaterRequest registrationRequest);
 }
 
