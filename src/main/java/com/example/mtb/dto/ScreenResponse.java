@@ -12,6 +12,6 @@ public record ScreenResponse(
         ScreenType screenType,
         Integer capacity,
         Integer noOfRows,
-        List<Seat>seats
+        SeatResponse seats
 ) {
 }
