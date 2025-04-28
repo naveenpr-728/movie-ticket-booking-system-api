@@ -1,5 +1,6 @@
 package com.example.mtb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +19,16 @@ import java.time.LocalDateTime;
 public class Seat {
 
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
-        private String seatId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String seatId;
 
-        @ManyToOne
-        private Screen screen;
+    private String name;
 
-        @CreatedDate
-        private LocalDateTime createdAt;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Screen screen;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+}
