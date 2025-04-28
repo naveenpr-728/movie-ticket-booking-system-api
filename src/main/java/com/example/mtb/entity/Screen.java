@@ -1,5 +1,6 @@
 package com.example.mtb.entity;
 
+import com.example.mtb.enums.ScreenType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,28 +17,28 @@ import java.util.List;
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @ToString
+public class Screen {
 
-public class Theater {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String theaterId;
-    private String name;
-    private String address;
-    private String city;
-    private String landmark;
-
+    private String screenId;
+    private ScreenType screenType;
+    private Integer capacity;
+    private Integer noOfRows;
 
     @ManyToOne
-    private TheaterOwner theaterOwner;
+    private Theater theater;
 
-
-    @OneToMany(mappedBy = "theater")
-    private List<Screen> screens;
+    @OneToMany(mappedBy = "screen", cascade = CascadeType.PERSIST)
+    private List<Seat> seats;
 
     @CreatedDate
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
     private String createdBy;
+
 
 }
