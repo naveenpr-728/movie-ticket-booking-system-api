@@ -32,7 +32,8 @@ public class TheaterServiceImpl implements TheaterService {
         }
         throw new UserNotFoundByEmailException("No Theater Owner with the provided email is present");
     }
-  
+
+    @Override
     public TheaterResponse findTheater(String theaterId) {
             if(theaterRepository.existsById(theaterId)){
                 Theater theater = theaterRepository.findById(theaterId).get();
@@ -42,7 +43,6 @@ public class TheaterServiceImpl implements TheaterService {
         }
 
     @Override
-
     public TheaterResponse updateTheater(String theaterId, TheaterRequest registrationRequest) {
         if(theaterRepository.existsById(theaterId)) {
             Theater theater = theaterRepository.findById(theaterId).get();
