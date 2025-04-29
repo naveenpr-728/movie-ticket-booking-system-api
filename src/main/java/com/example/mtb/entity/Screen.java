@@ -36,6 +36,7 @@ public class Screen {
     @JsonIgnore
     private List<Seat> seats;
 
+
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
