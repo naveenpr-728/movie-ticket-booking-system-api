@@ -3,7 +3,7 @@ spring:
           name: movie-ticket-booking-system-api
     #data resource config file
    datasource:
-          url: jdbc:mysql://localhost:3306/movie-ticket-booking-system-api?createDatabaseIfNotExist=true
+          url: jdbc:mysql://localhost:3306/movie_ticket_booking_system_api?createDatabaseIfNotExist=true
           username: root
           password: root
    jpa:
