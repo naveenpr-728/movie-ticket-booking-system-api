@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -21,6 +22,7 @@ public class TheaterController {
 
 
     @PostMapping("/theaters")
+    @PreAuthorize("hasAuthority('THEATER_OWNER')")
     public ResponseEntity<ResponseStructure<TheaterResponse>> addTheater(String email, @Valid @RequestBody TheaterRegistrationRequest theaterRegistrationRequest) {
         TheaterResponse theaterResponse = theaterService.addTheater(email, theaterRegistrationRequest);
         return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully created", theaterResponse);
@@ -35,6 +37,7 @@ public class TheaterController {
     }
 
     @PutMapping("/theaters/{theaterId}")
+    @PreAuthorize("hasAuthority('THEATER_OWNER')")
     public ResponseEntity<ResponseStructure<TheaterResponse>> updateTheater(@PathVariable String theaterId, @Valid @RequestBody TheaterRequest registrationRequest) {
         TheaterResponse theaterResponse = theaterService.updateTheater(theaterId, registrationRequest);
         return responseBuilder.sucess(HttpStatus.OK, "Theater has been successfully Updated", theaterResponse);

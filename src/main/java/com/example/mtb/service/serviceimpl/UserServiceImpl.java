@@ -12,6 +12,7 @@ import com.example.mtb.mapper.UserDetailsMapper;
 import com.example.mtb.repository.UserRepository;
 import com.example.mtb.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserDetailsMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponse addUser(UserRegistrationRequest user) {
@@ -68,13 +70,13 @@ public class UserServiceImpl implements UserService {
 
 
     private UserDetails copy(UserDetails userRole, UserRegistrationRequest user) {
-//        UserDetails userRole = user.getUserRole()==UserRole.USER ? new User() : new TheaterOwner();
         userRole.setUserRole(user.userRole());
+        userRole.setPassword(passwordEncoder.encode(user.password()));
         userRole.setEmail(user.email());
-        userRole.setPassword(user.password());
         userRole.setDateOfBirth(user.DateOfBirth());
         userRole.setPhoneNumber(user.phoneNumber());
         userRole.setUsername(user.username());
+        userRole.setDelete(false);
         userRepository.save(userRole);
         return userRole;
     }
@@ -84,6 +86,7 @@ public class UserServiceImpl implements UserService {
         userRole.setPhoneNumber(user.phoneNumber());
         userRole.setEmail(user.email());
         userRole.setUsername(user.username());
+        userRole.setDelete(false);
         userRepository.save(userRole);
         return userRole;
     }
