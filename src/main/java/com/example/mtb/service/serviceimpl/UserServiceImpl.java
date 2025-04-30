@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByEmail(email)) {
             UserDetails user = userRepository.findByEmail(email);
             user.setDelete(true);
-            user.setDeletedAt(LocalDateTime.now());
+            user.setDeletedAt(Instant.now());
             userRepository.save(user);
             return userMapper.userDetailsResponseMapper(user);
         }

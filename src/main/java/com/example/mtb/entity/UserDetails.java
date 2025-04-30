@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,23 +26,38 @@ import java.time.LocalTime;
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private String userId;
+    @Column(name = "username", nullable = false)
     private String username;
-    @Column(unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "phone_number", updatable = true, length = 10, nullable = false)
     private String phoneNumber;
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "user_role", updatable = false, nullable = false)
     private UserRole userRole;
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate DateOfBirth;
+
+    @Column(name = "is_deleted")
     private boolean isDelete;
-    private LocalDateTime deletedAt;
+    @Column(name = "deleted_at")
+    private Instant deletedAt;
 
     @CreatedDate
-    private LocalDateTime createdAt;
+    @Column(name = "created-at", nullable = false)
+    private Instant createdAt;
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    @Column(name = "updated-at")
+    private Instant updatedAt;
+
+    @Column(name = "created_by", updatable = false)
+    @CreatedBy
+    private String createdBy;
 
 
 }
