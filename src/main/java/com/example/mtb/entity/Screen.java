@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -31,6 +32,11 @@ public class Screen {
     @Column(name = "screen-type",updatable = false,nullable = false)
     @Enumerated(EnumType.STRING)
     private ScreenType screenType;
+
+    @OneToMany(mappedBy = "screen", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Show> shows;
+
 
     @Column(name = "capacity")
     private Integer capacity;
@@ -58,6 +64,5 @@ public class Screen {
     @Column(name = "created_by")
     @CreatedBy
     private String createdBy;
-
 
 }

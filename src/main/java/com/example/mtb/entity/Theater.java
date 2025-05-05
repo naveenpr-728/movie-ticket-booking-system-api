@@ -40,6 +40,7 @@ public class Theater {
 
 
     @ManyToOne
+    @JoinColumn(name = "theater_owner_id")
     private TheaterOwner theaterOwner;
 
 
@@ -54,7 +55,6 @@ public class Theater {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @Column(name = "created_by",updatable = false,nullable = false)
     @CreatedBy
     private String createdBy;
 
