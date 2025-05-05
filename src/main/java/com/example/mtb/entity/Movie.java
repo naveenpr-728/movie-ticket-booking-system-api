@@ -24,8 +24,10 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "movie_id")
     private String movieId;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "description")
     private String description;
 
@@ -42,4 +44,7 @@ public class Movie {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "certificate")
     private Certificate certificate;
+
+    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
+    private List<Show> shows;
 }
