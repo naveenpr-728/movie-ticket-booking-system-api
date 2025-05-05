@@ -47,4 +47,7 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
     private List<Show> shows;
+
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
+    private List<Feedback> feedbacks;
 }
