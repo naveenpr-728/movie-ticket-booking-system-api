@@ -3,9 +3,9 @@ spring:
           name: movie-ticket-booking-system-api
     #data resource config file
    datasource:
-          url: jdbc:mysql://localhost:3306/movie_ticket_booking_system_api?createDatabaseIfNotExist=true
-          username: root
-          password: root
+          url: "${URL:jdbc:mysql://localhost:3306/movie_ticket_booking_system_api?createDatabaseIfNotExist=true}"
+          username: "${MYSQL_USERNAME:root}"
+          password: "${MYSQL_PASSWORD:root}"
    jpa:
      open-in-view: false
      show-sql: true
@@ -14,3 +14,7 @@ spring:
      properties:
        hibernate:
          format_sql: true
+app:
+   token:
+      secret: "${TOKEN_SECRET:p7ctKoWhIiGRHpyZ+t/YQsb0fXdczx6K49QqClbb0yk=}"
+       #only for testing anf development mode
