@@ -17,5 +17,7 @@ public class AppEnv {
     public static class Token {
 
         private String secret;
+        private int accessDuration;
+        private int refreshDuration;
     }
 }

@@ -22,7 +22,6 @@ public class AuthMapper {
                 .refreshExpiration(refresh.expiration().toEpochMilli())
                 .accessToken(accessToken)
                 .refreshTokens(refreshToken)
-                .refreshTokens(refreshToken)
                 .build();
 
     }
