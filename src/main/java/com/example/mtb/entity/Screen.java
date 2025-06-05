@@ -45,6 +45,7 @@ public class Screen {
     private Integer noOfRows;
 
     @ManyToOne
+    @JoinColumn(name = "theater_id")
     private Theater theater;
 
     @OneToMany(mappedBy = "screen", cascade = CascadeType.PERSIST ,fetch = FetchType.EAGER)

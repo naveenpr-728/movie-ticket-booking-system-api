@@ -38,6 +38,10 @@ public class Show {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    private Theater theater;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;

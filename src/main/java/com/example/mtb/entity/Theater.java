@@ -47,6 +47,10 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<Screen> screens;
 
+    @OneToMany(mappedBy = "theater")
+    private List<Show> shows;
+
+
     @CreatedDate
     @Column(name = "created_at",updatable = false,nullable = false)
     private Instant createAt;

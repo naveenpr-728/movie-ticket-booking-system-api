@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 
 public class Seat {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "seat-id")
@@ -35,6 +34,7 @@ public class Seat {
 
     @Column(name = "is_delete")
     private Boolean isDelete;
+
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
